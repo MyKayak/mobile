@@ -1,2 +1,3 @@
-# mobile
-Flutter client for MyKayak
+# mykayak
+
+A new Flutter project.

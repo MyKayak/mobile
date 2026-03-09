@@ -1,0 +1,12 @@
+/home/fuffo/mobile/build/linux/x64/debug/bundle/mykayak
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/icudtl.dat
+/home/fuffo/mobile/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/shaders/stretch_effect.frag
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.bin
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/version.json
+/home/fuffo/mobile/build/linux/x64/debug/bundle/data/flutter_assets/NativeAssetsManifest.json
