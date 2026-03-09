@@ -12,8 +12,19 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: MeetsScreen(),
+        body: Center(child: MeetsScreen()),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (value) {print(value);},
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.developer_mode),
+              label: "Dev Options",
+            ),
+          ],
         ),
       ),
     );

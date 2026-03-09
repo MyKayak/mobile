@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 
-class MeetItem extends StatefulWidget {
-  String id;
-  String date;
-  String name;
-  String location;
-  MeetItem({super.key, required this.id, required this.date, required this.name, required this.location});
-  @override
-  State<MeetItem> createState() => _MeetItemState();
-}
-
-class _MeetItemState extends State<MeetItem> {
+class MeetItem extends StatelessWidget {
+  final String id;
+  final String date;
+  final String name;
+  final String location;
+  const MeetItem({super.key, required this.id, required this.date, required this.name, required this.location});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.location),
-              Text(widget.date)
+              Text(location, style:TextStyle(fontSize:18)),
+              Text(date, style:TextStyle(fontSize:18))
             ],
           ),
-          Text(widget.name),
+          Text(name, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color.fromARGB(128, 0, 0, 0), fontSize: 12)),
         ],
       ),
     );

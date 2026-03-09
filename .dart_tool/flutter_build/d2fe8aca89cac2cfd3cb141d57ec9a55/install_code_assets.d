@@ -1,0 +1,1 @@
+ /home/fuffo/mobile/.dart_tool/flutter_build/d2fe8aca89cac2cfd3cb141d57ec9a55/native_assets.json: 
