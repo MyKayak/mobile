@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/meet_item.dart';
 import '../utils/requests.dart';
 import '../models/meet.dart';
 class MeetsScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _MeetsScreenState extends State<MeetsScreen> {
   Widget build(BuildContext context) {
 
     return ListView(
-      children: meets.map((meet)=>(Text(meet.location))).toList(),
+      children: meets.map((meet)=>(MeetItem(id:meet.id,name:meet.name,location:meet.location,date:meet.date))).toList(),
     );
   }
 }
