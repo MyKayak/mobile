@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mykayak/views/racesScreen.dart';
 
-class MeetItem extends StatelessWidget {
+class RaceItem extends StatelessWidget {
   final String id;
-  final String date;
-  final String name;
-  final String location;
-  const MeetItem({super.key, required this.id, required this.date, required this.name, required this.location});
+  final int distance;
+  final String division;
+  final String category;
+  final String boat;
+  final String level;
+  const RaceItem({super.key, required this.id, required this.distance, required this.division, required this.category, required this.boat, required this.level});
   @override
   Widget build(BuildContext context) {
     return Padding(

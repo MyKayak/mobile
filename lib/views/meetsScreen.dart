@@ -26,17 +26,23 @@ class _MeetsScreenState extends State<MeetsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: meets
-          .map(
-            (meet) => (MeetItem(
-              id: meet.id,
-              name: meet.name,
-              location: meet.location,
-              date: meet.date,
-            )),
-          )
-          .toList(),
+    return Navigator(
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => ListView(
+            children: meets
+                .map(
+                  (meet) => (MeetItem(
+                    id: meet.id,
+                    name: meet.name,
+                    location: meet.location,
+                    date: meet.date,
+                  )),
+                )
+                .toList(),
+          ),
+        );
+      },
     );
   }
 }
