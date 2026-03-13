@@ -4,7 +4,7 @@ import 'package:mykayak/models/race.dart';
 import '../models/meet.dart';
 
 Future<List<Meet>> getMeets() async {
-  var url = Uri.http('localhost:8080', "meets"); // TODO: swap with the production domain name
+  var url = Uri.http('10.55.88.182:8080', "meets"); // TODO: swap with the production domain name
   var response = await http.get(url);
   var meets = <Meet>[];
   jsonDecode(response.body).forEach(
@@ -14,7 +14,7 @@ Future<List<Meet>> getMeets() async {
 }
 
 Future<List<Race>> getRaces(String id) async {
-  var url = Uri.http('localhost:8080', "races/$id"); // TODO: swap with the production domain name
+  var url = Uri.http('10.55.88.182:8080', "races/$id"); // TODO: swap with the production domain name
   var response = await http.get(url);
   var races = <Race>[];
   jsonDecode(response.body).forEach(

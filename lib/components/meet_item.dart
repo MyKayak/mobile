@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mykayak/views/racesScreen.dart';
+import 'package:mykayak/views/races_screen.dart';
 
 class MeetItem extends StatelessWidget {
   final String id;
@@ -17,8 +17,8 @@ class MeetItem extends StatelessWidget {
       child: ElevatedButton(
         onPressed: (){
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RacesScreen(),
-          ));
+            builder: (context) => RacesScreen(meetId: id),
+          )); 
         },
         style: ButtonStyle(
         ),
@@ -28,7 +28,7 @@ class MeetItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(location, style:TextStyle(fontSize:18)),
+                Text(location, style:TextStyle(fontSize:18), overflow: TextOverflow.ellipsis,),
                 Text(date, style:TextStyle(fontSize:18))
               ],
             ),

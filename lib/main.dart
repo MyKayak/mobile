@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../views/meetsScreen.dart';
-import '../views/devOptionsScreen.dart';
+import 'views/meets_screen.dart';
+import 'views/settings_screen.dart';
 
 void main() {
   runApp(MainApp());
@@ -16,7 +16,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   final _views = [
     MeetsScreen(),
-    DevOptionsScreen(),
+    SettingsScreen(),
   ];
 
   int _pageIndex = 0;
@@ -36,8 +36,8 @@ class _MainAppState extends State<MainApp> {
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.developer_mode),
-              label: "Dev Options",
+              icon: Icon(Icons.settings),
+              label: "Impostazioni",
             ),
           ],
         ),
