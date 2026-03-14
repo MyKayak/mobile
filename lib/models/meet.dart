@@ -1,8 +1,8 @@
 class Meet {
-  String id;
-  String name;
-  String location;
-  String date;
+  final String id;
+  final String name;
+  final String location;
+  final String date;
 
   Meet(this.id, this.name, this.location, this.date);
 

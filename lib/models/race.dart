@@ -1,10 +1,10 @@
 class Race {
-  String id;
-  int distance;
-  String division;
-  String category;
-  String boat;
-  String level;
+  final String id;
+  final int distance;
+  final String division;
+  final String category;
+  final String boat;
+  final String level;
 
   Race(this.id, this.distance, this.division, this.category, this.boat, this.level);
 

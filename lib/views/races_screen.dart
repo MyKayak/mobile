@@ -4,9 +4,9 @@ import 'package:mykayak/models/race.dart';
 import 'package:mykayak/utils/requests.dart';
 
 class RacesScreen extends StatefulWidget {
-  String meetId;
+  final String meetId;
 
-  RacesScreen({super.key, required this.meetId});
+  const RacesScreen({super.key, required this.meetId});
 
   @override
   State<RacesScreen> createState() => _RacesScreenState();

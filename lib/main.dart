@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'views/meets_screen.dart';
 import 'views/settings_screen.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatefulWidget {
-  MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   State<MainApp> createState() => _MainAppState();
@@ -25,7 +26,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(child: _views[_pageIndex]),
+        body: _views[_pageIndex],
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
             setState((){_pageIndex = value;});
