@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'views/meets_screen.dart';
 import 'views/settings_screen.dart';
+import 'utils/db.dart';
 
-void main() {
+// Provides access to the ObjectBox Store throughout the app.
+late ObjectBox objectbox;
+
+Future<void> main() async {
+  // This is required so ObjectBox can get the application directory
+  // to store the database in.
+  WidgetsFlutterBinding.ensureInitialized();
+
+  objectbox = await ObjectBox.create();
+
   runApp(const ProviderScope(child: MainApp()));
 }
 

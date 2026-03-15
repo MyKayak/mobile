@@ -14,14 +14,10 @@ class MeetItem extends StatelessWidget {
         vertical: 5,
         horizontal: 10
       ),
-      child: ElevatedButton(
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RacesScreen(meetId: id),
-          )); 
-        },
-        style: ButtonStyle(
-        ),
+      child: InkWell(
+        onTap: () {Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => RacesScreen(meetId:id),
+        ));},
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

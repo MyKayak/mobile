@@ -60,13 +60,10 @@ class RaceItem extends StatelessWidget {
         vertical: 5,
         horizontal: 10
       ),
-      child: ElevatedButton(
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RacesScreen(meetId:""), // TODO: swap for a heats screen
-          ));
-        },
-        style: ButtonStyle(),
+      child: InkWell(
+        onTap: () {Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => RacesScreen(meetId:""),
+        ));},
         child: Text(label, style:TextStyle(fontSize:18), overflow: TextOverflow.ellipsis,)
       ),
     );
