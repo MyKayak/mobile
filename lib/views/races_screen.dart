@@ -20,6 +20,7 @@ class RacesScreen extends ConsumerWidget {
             final race = races[index];
             return RaceItem(
               id: race.id,
+              code: race.code,
               distance: race.distance,
               division: race.division,
               category: race.category,
