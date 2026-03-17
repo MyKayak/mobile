@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mykayak/models/medal_table_entry.dart';
 import 'package:mykayak/models/race.dart';
 import '../models/meet.dart';
 
@@ -21,4 +22,14 @@ Future<List<Race>> getRaces(String serverIp, String id) async {
     (map) {races.add(Race.fromMap(map));}
   );
   return races;
+}
+
+Future<List<MedalTableEntry>> getMedalTable(String serverIp, String id) async {
+  var url = Uri.http(serverIp, "medal_table/$id");
+  var response = await http.get(url);
+  var entries = <MedalTableEntry>[];
+  jsonDecode(response.body).forEach(
+    (map) {entries.add(MedalTableEntry.fromMap(map));}
+  );
+  return entries;
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mykayak/views/races_screen.dart';
 
-class RaceItem extends StatelessWidget {
+class RaceWidget extends StatelessWidget {
   final int id;
   final String code;
   final int distance;
@@ -9,7 +9,7 @@ class RaceItem extends StatelessWidget {
   final String category;
   final String boat;
   final String level;
-  const RaceItem({super.key, required this.id, required this.code, required this.distance, required this.division, required this.category, required this.boat, required this.level});
+  const RaceWidget({super.key, required this.id, required this.code, required this.distance, required this.division, required this.category, required this.boat, required this.level});
   @override
   Widget build(BuildContext context) {
     String label = "";

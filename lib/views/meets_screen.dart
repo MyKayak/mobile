@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../components/meet_item.dart';
+import '../components/meet_widget.dart';
 import '../providers/meet_provider.dart';
 
 class MeetsScreen extends ConsumerWidget {
@@ -15,7 +15,7 @@ class MeetsScreen extends ConsumerWidget {
         itemCount: meets.length,
         itemBuilder: (context, index) {
           final meet = meets[index];
-          return MeetItem(
+          return MeetWidget(
             id: meet.id,
             name: meet.name,
             location: meet.location,
