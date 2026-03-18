@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mykayak/views/heats_screen.dart';
 import 'package:mykayak/views/races_screen.dart';
 
 class RaceWidget extends StatelessWidget {
@@ -63,7 +64,7 @@ class RaceWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => RacesScreen(meetId:""),
+          builder: (context) => HeatsScreen(raceId:id),
         ));},
         child: Text(label, style:TextStyle(fontSize:18), overflow: TextOverflow.ellipsis,)
       ),
