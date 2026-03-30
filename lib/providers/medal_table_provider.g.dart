@@ -66,7 +66,7 @@ final class MedalTableEntriesProvider
   }
 }
 
-String _$medalTableEntriesHash() => r'f484cd80c03cb6123e4209ee094d2ee16d53850a';
+String _$medalTableEntriesHash() => r'1a3cae12412cc391980b9f6af708dede2d389392';
 
 final class MedalTableEntriesFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<MedalTableEntry>>, String> {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mykayak/views/heats_screen.dart';
-import 'package:mykayak/views/races_screen.dart';
 
 class RaceWidget extends StatelessWidget {
   final int id;

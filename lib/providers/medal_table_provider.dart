@@ -1,12 +1,11 @@
 import 'package:mykayak/models/medal_table_entry.dart';
-import '../providers/settings_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../utils/requests.dart';
+import 'api_service_provider.dart';
 
 part 'medal_table_provider.g.dart';
 
-@riverpod 
+@riverpod
 Future<List<MedalTableEntry>> medalTableEntries(Ref ref, String meetId) async {
-  final settings = ref.watch(settingsStateProvider);
-  return await getMedalTable(settings.serverIp, meetId);
+  final apiService = ref.watch(apiServiceProvider);
+  return await apiService.getMedalTable(meetId);
 }

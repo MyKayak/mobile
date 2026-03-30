@@ -63,7 +63,7 @@ final class HeatsProvider
   }
 }
 
-String _$heatsHash() => r'4e79afb4b4dce0662cd6a3320d6c316557e0ae5b';
+String _$heatsHash() => r'25e1dfe8fd32edb579892d4e16bc16c4693aa03f';
 
 final class HeatsFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<Heat>>, String> {
