@@ -63,7 +63,7 @@ class ApiService {
 
   Future<List<MedalTableEntry>> getMedalTable(String meetId) async {
     return await _get(
-      'medal_table/$meetId',
+      'medal_table?meet_id=$meetId',
       (map) => MedalTableEntry.fromMap(map),
     );
   }
