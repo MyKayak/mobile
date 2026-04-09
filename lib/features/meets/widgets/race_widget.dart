@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mykayak/views/heats_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class RaceWidget extends StatelessWidget {
+  final String meetId;
   final int id;
   final String code;
   final int distance;
@@ -9,7 +10,7 @@ class RaceWidget extends StatelessWidget {
   final String category;
   final String boat;
   final String level;
-  const RaceWidget({super.key, required this.id, required this.code, required this.distance, required this.division, required this.category, required this.boat, required this.level});
+  const RaceWidget({super.key, required this.meetId, required this.id, required this.code, required this.distance, required this.division, required this.category, required this.boat, required this.level});
   @override
   Widget build(BuildContext context) {
     String label = "";
@@ -28,7 +29,7 @@ class RaceWidget extends StatelessWidget {
       case "CDB":
         label += "Cadetti B ";
       case "RA1":
-        label += "Ragazzi primo anno "; // TODO: make sure it's not too long
+        label += "Ragazzi primo anno ";
       case "RAG":
         label += "Ragazzi ";
       case "JUN":
@@ -62,9 +63,9 @@ class RaceWidget extends StatelessWidget {
         horizontal: 10
       ),
       child: InkWell(
-        onTap: () {Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HeatsScreen(raceId:id),
-        ));},
+        onTap: () {
+          context.push('/meets/races/$meetId/heats/$id');
+        },
         child: Text(label, style:TextStyle(fontSize:18), overflow: TextOverflow.ellipsis,)
       ),
     );

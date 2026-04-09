@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mykayak/views/races_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class MeetWidget extends StatelessWidget {
   final String id;
@@ -15,9 +15,9 @@ class MeetWidget extends StatelessWidget {
         horizontal: 10
       ),
       child: InkWell(
-        onTap: () {Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => RacesScreen(meetId:id),
-        ));},
+        onTap: () {
+          context.push('/meets/races/$id');
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

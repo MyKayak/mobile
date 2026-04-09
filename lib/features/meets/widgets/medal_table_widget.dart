@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../components/medal_table_entry_widget.dart';
-import '../providers/medal_table_provider.dart';
+import 'medal_table_entry_widget.dart';
+import '../providers/meet_providers.dart';
 import 'dart:math';
 
 class MedalTableWidget extends ConsumerWidget {

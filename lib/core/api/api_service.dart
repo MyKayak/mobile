@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/heat.dart';
-import '../models/meet.dart';
-import '../models/race.dart';
-import '../models/medal_table_entry.dart';
+import '../../features/meets/models/heat.dart';
+import '../../features/meets/models/meet.dart';
+import '../../features/meets/models/race.dart';
+import '../../features/meets/models/medal_table_entry.dart';
 
 class ApiException implements Exception {
   final String message;

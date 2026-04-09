@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mykayak/providers/heats_provider.dart';
-
-import '../components/heat_widget.dart';
+import '../providers/meet_providers.dart';
+import '../widgets/heat_widget.dart';
 
 class HeatsScreen extends ConsumerWidget {
   final int raceId;

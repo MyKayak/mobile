@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mykayak/components/medal_table_widget.dart';
-import 'package:mykayak/components/race_widget.dart';
-import '../providers/race_provider.dart';
+import '../widgets/medal_table_widget.dart';
+import '../widgets/race_widget.dart';
+import '../providers/meet_providers.dart';
 
 class RacesScreen extends ConsumerWidget {
   final String meetId;
@@ -24,6 +24,7 @@ class RacesScreen extends ConsumerWidget {
                   children: races
                       .map(
                         (race) => RaceWidget(
+                          meetId: meetId,
                           id: race.id,
                           code: race.code,
                           distance: race.distance,

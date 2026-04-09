@@ -250,3 +250,14 @@ GoogleService-Info.plist
 google-services.json
 # Plugins (already resolved through pubspec.yaml)
 .flutter-plugins
+
+# FVM
+.fvm/
+
+# VS Code
+.vscode/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+objectbox.g.dart
