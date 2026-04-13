@@ -1,13 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/team_providers.dart';
+import '../widgets/team_widget.dart';
 
-class TeamsScreen extends StatelessWidget {
+class TeamsScreen extends ConsumerWidget {
   const TeamsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final query = ref.watch(searchQueryProvider);
+    final asyncTeams = ref.watch(teamsProvider(query));
+
     return Scaffold(
       appBar: AppBar(title: const Text('Teams')),
-      body: const Center(child: Text("Teams Page Placeholder")),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            TextField(
+              onChanged: (value) {
+                ref.read(searchQueryProvider.notifier).update(value);
+              },
+              decoration: const InputDecoration(
+                hintText: 'Search teams...',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            asyncTeams.when(
+              data: (data) => Expanded(
+                child: ListView(
+                  children: data
+                      .map(
+                        (teamPreview) => TeamWidget(teamPreview: teamPreview),
+                      )
+                      .toList(),
+                ),
+              ),
+              error: (err, stack) => Center(child: Text(err.toString())),
+              loading: () => const Expanded(
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

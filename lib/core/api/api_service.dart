@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mykayak/features/teams/models/team_preview.dart';
 import '../../features/meets/models/heat.dart';
 import '../../features/meets/models/meet.dart';
 import '../../features/meets/models/race.dart';
@@ -70,6 +71,10 @@ class ApiService {
 
   Future<List<Heat>> getHeats(String raceId) async {
     return await _get('heats/$raceId', (map) => Heat.fromMap(map));
+  }
+
+  Future<List<TeamPreview>> getTeams(String hint) async  {
+    return await _get('teams?hint=$hint', (map) => TeamPreview.fromMap(map));
   }
 
   void dispose() {
