@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mykayak/features/teams/models/team_preview.dart';
+import 'package:mykayak/features/search/models/team_preview.dart';
 
 class TeamWidget extends StatelessWidget {
   final TeamPreview teamPreview;
 
-  TeamWidget({super.key, required this.teamPreview});
+  const TeamWidget({super.key, required this.teamPreview});
 
   @override
   Widget build(BuildContext ctx) {

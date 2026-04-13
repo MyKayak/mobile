@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mykayak/features/teams/models/team_preview.dart';
+import 'package:mykayak/features/search/models/team_preview.dart';
 import '../../features/meets/models/heat.dart';
 import '../../features/meets/models/meet.dart';
 import '../../features/meets/models/race.dart';

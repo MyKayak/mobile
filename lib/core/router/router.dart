@@ -3,8 +3,7 @@ import '../../features/meets/views/meets_screen.dart';
 import '../../features/meets/views/races_screen.dart';
 import '../../features/meets/views/heats_screen.dart';
 import '../../features/settings/views/settings_screen.dart';
-import '../../features/teams/views/teams_screen.dart';
-import '../../features/athletes/views/athletes_screen.dart';
+import '../../features/search/views/search_screen.dart';
 import '../../features/auth/views/login_screen.dart';
 import 'scaffold_with_nav_bar.dart';
 
@@ -47,16 +46,8 @@ final goRouter = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: '/teams',
-              builder: (context, state) => const TeamsScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/athletes',
-              builder: (context, state) => const AthletesScreen(),
+              path: '/search',
+              builder: (context, state) => const SearchScreen(),
             ),
           ],
         ),

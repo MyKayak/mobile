@@ -5,7 +5,7 @@ import '../models/team_preview.dart';
 part 'team_providers.g.dart';
 
 @riverpod
-class searchQuery extends _$searchQuery {
+class SearchQuery extends _$SearchQuery {
   @override
   String build() => '';
 
@@ -17,4 +17,3 @@ Future<List<TeamPreview>> teams(Ref ref, String hint) async {
   final apiService = ref.watch(apiServiceProvider);
   return await apiService.getTeams(hint);
 }
-
