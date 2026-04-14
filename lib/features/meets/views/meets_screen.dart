@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mykayak/features/settings/widgets/settings_button.dart';
 import '../widgets/meet_widget.dart';
 import '../providers/meet_providers.dart';
 
@@ -11,7 +12,13 @@ class MeetsScreen extends ConsumerWidget {
     final meetsAsync = ref.watch(meetsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Gare e Risultati")),
+      appBar: AppBar(title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text("Gare e Risultati"),
+          const SettingsButton()
+        ],
+      )),
       body: meetsAsync.when(
         data: (meets) => ListView.builder(
           itemCount: meets.length,
