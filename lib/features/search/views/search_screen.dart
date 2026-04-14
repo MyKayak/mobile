@@ -18,7 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search')),
+      appBar: AppBar(title: const Text('Cerca')),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -29,12 +29,12 @@ class _SearchScreenState extends State<SearchScreen> {
                   segments: const [
                     ButtonSegment<SearchMode>(
                       value: SearchMode.athletes,
-                      label: Text('Athletes'),
+                      label: Text('Atleti'),
                       icon: Icon(Icons.person),
                     ),
                     ButtonSegment<SearchMode>(
                       value: SearchMode.teams,
-                      label: Text('Teams'),
+                      label: Text('Società'),
                       icon: Icon(Icons.groups),
                     ),
                   ],

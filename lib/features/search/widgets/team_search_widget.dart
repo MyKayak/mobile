@@ -20,7 +20,7 @@ class TeamSearchWidget extends ConsumerWidget {
               ref.read(searchQueryProvider.notifier).update(value);
             },
             decoration: const InputDecoration(
-              hintText: 'Search teams...',
+              hintText: 'Canottieri...',
               border: OutlineInputBorder(),
             ),
           ),
