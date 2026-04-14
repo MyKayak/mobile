@@ -1,3 +1,4 @@
+import 'package:mykayak/features/teams/models/team_detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/api/api_service_provider.dart';
 import '../models/team_preview.dart';
@@ -16,4 +17,10 @@ class SearchQuery extends _$SearchQuery {
 Future<List<TeamPreview>> teams(Ref ref, String hint) async {
   final apiService = ref.watch(apiServiceProvider);
   return await apiService.getTeams(hint);
+}
+
+@riverpod
+Future<TeamDetail> team(Ref ref, String id) async {
+  final apiService = ref.watch(apiServiceProvider);
+  return await apiService.getTeam(id);
 }

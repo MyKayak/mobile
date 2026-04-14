@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:mykayak/features/athletes/views/athlete_screen.dart';
+import 'package:mykayak/features/teams/views/team_screen.dart';
 import '../../features/meets/views/meets_screen.dart';
 import '../../features/meets/views/races_screen.dart';
 import '../../features/meets/views/heats_screen.dart';
@@ -13,6 +15,14 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/login',
       builder: (context, state) => const LoginScreen(),
+    ),
+    GoRoute(
+      path: '/athlete/:id',
+      builder: (context, state) => AthleteScreen(id: int.parse(state.pathParameters["id"]!)),
+    ),
+    GoRoute(
+      path: '/team/:id',
+      builder: (context, state) => TeamScreen(id: state.pathParameters["id"]!),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

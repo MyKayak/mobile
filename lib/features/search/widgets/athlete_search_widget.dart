@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/athlete_providers.dart';
-import 'athlete_widget.dart';
+import '../../athletes/providers/athlete_providers.dart';
+import '../../athletes/widgets/athlete_widget.dart';
 
 class AthleteSearchWidget extends ConsumerWidget {
   const AthleteSearchWidget({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/team_providers.dart';
-import 'team_widget.dart';
+import '../../teams/providers/team_providers.dart';
+import '../../teams/widgets/team_widget.dart';
 
 class TeamSearchWidget extends ConsumerWidget {
   const TeamSearchWidget({super.key});

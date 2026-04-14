@@ -8,10 +8,10 @@ class AthletePreview {
 
   factory AthletePreview.fromMap(Map<String, dynamic> map) {
     return AthletePreview(
-      map["id"] ?? 0,
-      map["name"],
-      map["surname"],
-      map["birth_date"]
+      map["athlete_id"] ?? map["id"] ?? 0,
+      map["name"] ?? "",
+      map["surname"] ?? "",
+      map["birth_date"] ?? ""
     );
   }
 }

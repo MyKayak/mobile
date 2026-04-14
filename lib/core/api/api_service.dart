@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mykayak/features/search/models/athlete_preview.dart';
-import 'package:mykayak/features/search/models/team_preview.dart';
+import 'package:mykayak/features/athletes/models/athlete_detail.dart';
+import 'package:mykayak/features/athletes/models/athlete_preview.dart';
+import 'package:mykayak/features/teams/models/team_detail.dart';
+import 'package:mykayak/features/teams/models/team_preview.dart';
 import '../../features/meets/models/heat.dart';
 import '../../features/meets/models/meet.dart';
 import '../../features/meets/models/race.dart';
@@ -55,6 +57,34 @@ class ApiService {
     }
   }
 
+  Future<T> _getSingle<T>(
+    String path,
+    T Function(Map<String, dynamic>) fromMap,
+  ) async {
+    try {
+      final url = Uri.parse('$baseUrl/$path');
+      final response = await _client.get(url);
+
+      if (response.statusCode == 200) {
+        final dynamic body = jsonDecode(response.body);
+        return fromMap(body as Map<String, dynamic>);
+      } else {
+        throw ApiException(
+          'Request failed: ${response.reasonPhrase}',
+          statusCode: response.statusCode,
+        );
+      }
+    } on http.ClientException catch (e) {
+      throw ApiException('Network error: ${e.message}');
+    } on FormatException catch (e) {
+      throw ApiException('Invalid response format: ${e.message}');
+    } on ApiException {
+      rethrow;
+    } catch (e) {
+      throw ApiException('Unexpected error: $e');
+    }
+  }
+
   Future<List<Meet>> getMeets() async {
     return await _get('meets', (map) => Meet.fromMap(map));
   }
@@ -80,6 +110,14 @@ class ApiService {
 
   Future<List<AthletePreview>> getAthletes(String hint) async  {
     return await _get('athletes?name_hint=$hint', (map) => AthletePreview.fromMap(map));
+  }
+
+  Future<TeamDetail> getTeam(String id) async  {
+    return await _getSingle('team/$id', (map) => TeamDetail.fromMap(map));
+  }
+
+  Future<AthleteDetail> getAthlete(int id) async  {
+    return await _getSingle('athlete/${id.toString()}', (map) => AthleteDetail.fromMap(map));
   }
 
   void dispose() {
