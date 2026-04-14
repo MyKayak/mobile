@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/team_providers.dart';
-import 'team_widget.dart';
+import '../providers/athlete_providers.dart';
+import 'athlete_widget.dart';
 
-class TeamSearchWidget extends ConsumerWidget {
-  const TeamSearchWidget({super.key});
+class AthleteSearchWidget extends ConsumerWidget {
+  const AthleteSearchWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final query = ref.watch(searchQueryProvider);
-    final asyncTeams = ref.watch(teamsProvider(query));
+    final asyncAthletes = ref.watch(athletesProvider(query));
 
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -21,17 +21,16 @@ class TeamSearchWidget extends ConsumerWidget {
               ref.read(searchQueryProvider.notifier).update(value);
             },
             decoration: const InputDecoration(
-              hintText: 'Canottieri...',
+              hintText: 'Daniele Sc...',
               border: OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 10),
-
-          asyncTeams.when(
+          asyncAthletes.when(
             data: (data) => Expanded(
               child: ListView(
                 children: data
-                    .map((teamPreview) => TeamWidget(teamPreview: teamPreview))
+                    .map((athletePreview) => AthleteWidget(athletePreview: athletePreview))
                     .toList(),
               ),
             ),

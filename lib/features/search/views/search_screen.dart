@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mykayak/features/search/widgets/athlete_search_widget.dart';
 import '../providers/team_providers.dart';
 import '../widgets/team_search_widget.dart';
 
@@ -52,10 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: mode == SearchMode.teams
                   ? const TeamSearchWidget()
-                  : const Center(
-                      child: Text('Placeholder (for athlete search widget)'),
-                    ),
-            ),
+                  : const AthleteSearchWidget())
           ],
         ),
       ),
