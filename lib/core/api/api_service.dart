@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mykayak/features/athletes/models/athlete_detail.dart';
 import 'package:mykayak/features/athletes/models/athlete_preview.dart';
+import 'package:mykayak/features/athlete_rankings/models/rankings.dart';
 import 'package:mykayak/features/teams/models/team_detail.dart';
 import 'package:mykayak/features/teams/models/team_preview.dart';
 import '../../features/meets/models/heat.dart';
@@ -122,5 +123,16 @@ class ApiService {
 
   void dispose() {
     _client.close();
+  }
+
+  Future<List<RankingEntry>> getRankings(RankingOptions options) async {
+    String path = 'rankings?';
+    path += "boat=${options.boat}&";
+    path += "distance=${options.distance}&";
+    path += "category=${options.category}&";
+    path += options.division != null ? "division=${options.division}&" : "";
+    path += options.season != null ? "after=${options.season! - 1}-12-31&before=${options.season! + 1}-01-01" : "";
+
+    return await _get(path, (map) => RankingEntry.fromMap(map));
   }
 }

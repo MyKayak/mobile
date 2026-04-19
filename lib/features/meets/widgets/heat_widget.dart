@@ -4,7 +4,7 @@ import '../models/heat.dart';
 class HeatWidget extends StatelessWidget {
   final Heat heat;
 
-  HeatWidget({super.key, required this.heat});
+  const HeatWidget({super.key, required this.heat});
 
   @override
   Widget build(BuildContext context) {

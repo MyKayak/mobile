@@ -48,7 +48,7 @@ class Performance {
       if (days > 0) days.toString().padLeft(2, '0'),
       if (days > 0 || hours > 0) hours.toString().padLeft(2, '0'),
       minutes.toString().padLeft(2, '0'),
-      seconds.toString().padLeft(2, '0') + '.' + millis.toString().padLeft(3, '0'),
+      '${seconds.toString().padLeft(2, '0')}.${millis.toString().padLeft(3, '0')}',
     ];
 
     return parts.join(':');

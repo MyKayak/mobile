@@ -4,6 +4,7 @@ import 'package:mykayak/features/teams/views/team_screen.dart';
 import '../../features/meets/views/meets_screen.dart';
 import '../../features/meets/views/races_screen.dart';
 import '../../features/meets/views/heats_screen.dart';
+import '../../features/rankings/views/ranking_screen.dart';
 import '../../features/settings/views/settings_screen.dart';
 import '../../features/search/views/search_screen.dart';
 import '../../features/auth/views/login_screen.dart';
@@ -50,6 +51,14 @@ final goRouter = GoRouter(
                   ],
                 ),
               ],
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/rankings',
+              builder: (context, state) => const RankingScreen(),
             ),
           ],
         ),

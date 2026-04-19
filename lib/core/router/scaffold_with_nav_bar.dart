@@ -18,6 +18,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         currentIndex: navigationShell.currentIndex,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Ranking'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Cerca'),
         ],
         onTap: (index) {
