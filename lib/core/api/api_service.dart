@@ -130,8 +130,8 @@ class ApiService {
     path += "boat=${options.boat}&";
     path += "distance=${options.distance}&";
     path += "category=${options.category}&";
-    path += options.division != null ? "division=${options.division}&" : "";
-    path += options.season != null ? "after=${options.season! - 1}-12-31&before=${options.season! + 1}-01-01" : "";
+    path += options.division != null && options.division != "Tutti" ? "division=${options.division}&" : "";
+    path += options.season != null && options.season! > 2000 ? "after=${options.season! - 1}-12-31&before=${options.season! + 1}-01-01" : "";
 
     return await _get(path, (map) => RankingEntry.fromMap(map));
   }
