@@ -1,3 +1,5 @@
+import '../../../core/utils/time_formatter.dart';
+
 class Heat {
   int id;
   int index;
@@ -38,20 +40,8 @@ class Performance {
   );
 
   String get timeLabel {
-    final millis = time % 1000;
-    final seconds = (time ~/ 1000) % 60;
-    final minutes = (time ~/ 60000) % 60;
-    final hours = (time ~/ 3600000) % 24;
-    final days = time ~/ 86400000;
-
-    final parts = <String>[
-      if (days > 0) days.toString().padLeft(2, '0'),
-      if (days > 0 || hours > 0) hours.toString().padLeft(2, '0'),
-      minutes.toString().padLeft(2, '0'),
-      '${seconds.toString().padLeft(2, '0')}.${millis.toString().padLeft(3, '0')}',
-    ];
-
-    return parts.join(':');
+    if (status.isNotEmpty && status != "OK") return status;
+    return TimeFormatter.formatTime(time);
   }
 
   factory Performance.fromMap(Map<String, dynamic> map) {

@@ -7,7 +7,8 @@ part 'medal_table_providers.g.dart';
 @riverpod
 Future<List<MedalTableEntry>> medalTableEntries(Ref ref, String meetId) async {
   final apiService = ref.watch(apiServiceProvider);
-  final options = ref.watch(medalTableOptionsStateProvider);
+  // Only apply global filters (season, championships) to the general medal table (empty meetId)
+  final options = meetId.isEmpty ? ref.watch(medalTableOptionsStateProvider) : null;
   return await apiService.getMedalTable(meetId, options: options);
 }
 
@@ -15,7 +16,7 @@ Future<List<MedalTableEntry>> medalTableEntries(Ref ref, String meetId) async {
 class MedalTableOptionsState extends _$MedalTableOptionsState {
   @override
   MedalTableOptions build() {
-    return const MedalTableOptions(season: 2026);
+    return const MedalTableOptions(season: -1, onlyChampionships: true);
   }
 
   void updateSeason(int? season) {
