@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/medal_table_widget.dart';
+import '../../medal_table/widgets/medal_table_by_meet.dart';
 import '../widgets/race_widget.dart';
 import '../providers/meet_providers.dart';
 
@@ -18,7 +18,7 @@ class RacesScreen extends ConsumerWidget {
         children: [
           Column(
             children: [
-              MedalTableWidget(meetId: meetId),
+              MedalTableByMeet(meetId: meetId, maxItems: 5),
               racesAsync.when(
                 data: (races) => Column(
                   children: races

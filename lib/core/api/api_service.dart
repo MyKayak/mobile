@@ -8,7 +8,7 @@ import 'package:mykayak/features/teams/models/team_preview.dart';
 import '../../features/meets/models/heat.dart';
 import '../../features/meets/models/meet.dart';
 import '../../features/meets/models/race.dart';
-import '../../features/meets/models/medal_table_entry.dart';
+import '../../features/medal_table/models/medal_table_entry.dart';
 
 class ApiException implements Exception {
   final String message;
@@ -94,9 +94,21 @@ class ApiService {
     return await _get('races/$meetId', (map) => Race.fromMap(map));
   }
 
-  Future<List<MedalTableEntry>> getMedalTable(String meetId) async {
+  Future<List<MedalTableEntry>> getMedalTable(String meetId, {MedalTableOptions? options}) async {
+    String path = 'medal_table?';
+    if (meetId.isNotEmpty) {
+      path += 'meet_id=$meetId&';
+    }
+    if (options != null) {
+      if (options.season != null && options.season! > 2000) {
+        path += "after=${options.season! - 1}-12-31&before=${options.season! + 1}-01-01&";
+      }
+      if (options.onlyChampionships) {
+        path += "only_championships=true&";
+      }
+    }
     return await _get(
-      'medal_table?meet_id=$meetId',
+      path,
       (map) => MedalTableEntry.fromMap(map),
     );
   }
