@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../teams/providers/team_providers.dart';
 import '../../teams/widgets/team_widget.dart';
+import '../../../core/widgets/shimmer.dart';
 
 class TeamSearchWidget extends ConsumerWidget {
   const TeamSearchWidget({super.key});
@@ -11,37 +12,41 @@ class TeamSearchWidget extends ConsumerWidget {
     final query = ref.watch(searchQueryProvider);
     final asyncTeams = ref.watch(teamsProvider(query));
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Column(
-        children: [
-          TextField(
-            onChanged: (value) {
-              if(value.length < 3) return;
-              ref.read(searchQueryProvider.notifier).update(value);
-            },
-            decoration: const InputDecoration(
-              hintText: 'Canottieri...',
-              prefixIcon: Icon(Icons.groups_outlined),
-            ),
+    return Column(
+      children: [
+        TextField(
+          onChanged: (value) {
+            if(value.length < 3) return;
+            ref.read(searchQueryProvider.notifier).update(value);
+          },
+          decoration: const InputDecoration(
+            hintText: 'Canottieri...',
+            prefixIcon: Icon(Icons.groups_outlined),
           ),
-          const SizedBox(height: 10),
-
-          asyncTeams.when(
-            data: (data) => Expanded(
-              child: ListView(
-                children: data
-                    .map((teamPreview) => TeamWidget(teamPreview: teamPreview))
-                    .toList(),
-              ),
+        ),
+        const SizedBox(height: 10),
+        Expanded(
+          child: asyncTeams.when(
+            data: (data) => ListView(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              children: data
+                  .map((teamPreview) => TeamWidget(teamPreview: teamPreview))
+                  .toList(),
             ),
             error: (err, stack) => Center(child: Text(err.toString())),
-            loading: () => const Expanded(
-              child: Center(child: CircularProgressIndicator()),
+            loading: () => Shimmer(
+              child: ListView.builder(
+                itemCount: 10,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: SkeletonBox(width: double.infinity, height: 50, borderRadius: 16),
+                ),
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

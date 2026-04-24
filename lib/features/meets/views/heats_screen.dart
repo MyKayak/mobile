@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/meet_providers.dart';
 import '../widgets/heat_widget.dart';
+import '../../../core/widgets/shimmer.dart';
 
 class HeatsScreen extends ConsumerWidget {
   final int raceId;
@@ -19,7 +20,27 @@ class HeatsScreen extends ConsumerWidget {
             ...heats.map((heat) => HeatWidget(heat: heat)),
           ],
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => Shimmer(
+          child: ListView.builder(
+            itemCount: 4,
+            padding: const EdgeInsets.all(16),
+            itemBuilder: (context, index) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SkeletonBox(width: 120, height: 20),
+                const SizedBox(height: 12),
+                ...List.generate(
+                  4,
+                  (index) => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: SkeletonBox(width: double.infinity, height: 40, borderRadius: 8),
+                  ),
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        ),
         error: (err, stack) => Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

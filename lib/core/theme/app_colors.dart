@@ -21,6 +21,24 @@ abstract final class AppColors {
   static const Color silver = Color(0xFFC0C0C0);
   static const Color bronze = Color(0xFFCD7F32);
 
+  static const LinearGradient goldGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFFFE082), Color(0xFFFFD700), Color(0xFFFFA000)],
+  );
+
+  static const LinearGradient silverGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFE0E0E0), Color(0xFFC0C0C0), Color(0xFF9E9E9E)],
+  );
+
+  static const LinearGradient bronzeGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFFFB380), Color(0xFFCD7F32), Color(0xFF8D5524)],
+  );
+
   static const Color error = Color(0xFFF85149);
   static const Color onError = Color(0xFFFFFFFF);
 

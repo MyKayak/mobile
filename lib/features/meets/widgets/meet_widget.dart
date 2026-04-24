@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/app_card.dart';
 
 class MeetWidget extends StatelessWidget {
   final String id;
@@ -13,21 +15,14 @@ class MeetWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final mono = theme.extension<AppTextStyles>()!;
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
-      onTap: () {
-        context.push('/meets/races/$id');
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: theme.colorScheme.outline.withAlpha(60),
-              width: 0.5,
-            ),
-          ),
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: AppCard(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          context.push('/meets/races/$id');
+        },
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,7 +32,7 @@ class MeetWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     location,
-                    style: theme.textTheme.titleMedium,
+                    style: theme.textTheme.titleSmall?.copyWith(fontSize: 15),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -45,7 +40,7 @@ class MeetWidget extends StatelessWidget {
                 Text(date, style: mono.monoDate),
               ],
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 4),
             Text(
               name,
               overflow: TextOverflow.ellipsis,

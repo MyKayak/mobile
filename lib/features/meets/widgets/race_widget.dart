@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/widgets/app_card.dart';
 
 class RaceWidget extends StatelessWidget {
   final String meetId;
@@ -59,24 +61,17 @@ class RaceWidget extends StatelessWidget {
         label += "Misto";
     }
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
-      onTap: () {
-        context.push('/meets/races/$meetId/heats/$id');
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: theme.colorScheme.outline.withAlpha(40),
-              width: 0.5,
-            ),
-          ),
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: AppCard(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          context.push('/meets/races/$meetId/heats/$id');
+        },
+        padding: const EdgeInsets.all(12),
         child: Text(
           label,
-          style: theme.textTheme.bodyLarge,
+          style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
           overflow: TextOverflow.ellipsis,
         ),
       ),

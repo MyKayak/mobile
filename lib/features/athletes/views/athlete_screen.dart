@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_theme.dart';
 import '../providers/athlete_providers.dart';
 import '../../../core/utils/time_formatter.dart';
+import '../../../core/widgets/shimmer.dart';
+import '../../../core/widgets/app_card.dart';
 
 class AthleteScreen extends ConsumerWidget {
   final int id;
@@ -83,23 +85,21 @@ class AthleteScreen extends ConsumerWidget {
                         return filteredPRs.map(
                           (pr) => SizedBox(
                             width: 148,
-                            child: Card(
+                            child: AppCard(
                               margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "${showBoat ? "${pr.boat[0]} " : ""}${pr.distance}m",
-                                      style: theme.textTheme.titleSmall,
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      pr.timeLabel,
-                                      style: mono.monoTime,
-                                    ),
-                                  ],
-                                ),
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${showBoat ? "${pr.boat[0]} " : ""}${pr.distance}m",
+                                    style: theme.textTheme.titleSmall,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    pr.timeLabel,
+                                    style: mono.monoTime,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -133,7 +133,39 @@ class AthleteScreen extends ConsumerWidget {
             ],
           ],
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => Shimmer(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SkeletonBox(width: 200, height: 28),
+                const SizedBox(height: 8),
+                const SkeletonBox(width: 120, height: 16),
+                const SizedBox(height: 32),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: const SkeletonBox(width: 150, height: 20),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    const SkeletonBox(width: 140, height: 70, borderRadius: 16),
+                    const SizedBox(width: 8),
+                    const SkeletonBox(width: 140, height: 70, borderRadius: 16),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: const SkeletonBox(width: 180, height: 20),
+                ),
+                const SizedBox(height: 16),
+                const SkeletonBox(width: double.infinity, height: 50, borderRadius: 8),
+              ],
+            ),
+          ),
+        ),
         error: (error, stack) => Center(child: Text(error.toString())),
       ),
     );

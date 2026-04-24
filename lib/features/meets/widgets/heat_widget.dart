@@ -41,59 +41,70 @@ class HeatWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          ...heat.performances.map(
-            (performance) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 32,
-                    child: Column(
-                      children: [
-                        Text(
-                          performance.placement.toString(),
-                          style: mono.monoMedal,
-                        ),
-                        Text(
-                          "(${performance.lane})",
-                          style: theme.textTheme.bodySmall?.copyWith(fontSize: 10),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+          ...heat.performances.asMap().entries.map(
+            (entry) {
+              final index = entry.key;
+              final performance = entry.value;
+              final isEven = index % 2 == 0;
+              
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 2),
+                padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                decoration: BoxDecoration(
+                  color: isEven ? theme.colorScheme.surfaceContainerHighest.withAlpha(50) : Colors.transparent,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 32,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ...performance.athletes.map(
-                            (athlete) => Text(
-                              "${athlete.name} ${athlete.surname}",
-                              style: theme.textTheme.bodyMedium,
-                            ),
+                          Text(
+                            performance.placement.toString(),
+                            style: mono.monoMedal,
+                          ),
+                          Text(
+                            "(${performance.lane})",
+                            style: theme.textTheme.bodySmall?.copyWith(fontSize: 10),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      performance.teamName,
-                      style: theme.textTheme.bodySmall,
-                      overflow: TextOverflow.ellipsis,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...performance.athletes.map(
+                              (athlete) => Text(
+                                "${athlete.name} ${athlete.surname}",
+                                style: theme.textTheme.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    performance.status.isEmpty
-                        ? performance.timeLabel
-                        : performance.status,
-                    style: mono.monoTime,
-                  ),
-                ],
-              ),
-            ),
+                    Expanded(
+                      child: Text(
+                        performance.teamName,
+                        style: theme.textTheme.bodySmall,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      performance.status.isEmpty
+                          ? performance.timeLabel
+                          : performance.status,
+                      style: mono.monoTime,
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ],
       ),

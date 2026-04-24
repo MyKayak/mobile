@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../core/theme/app_theme.dart';
 import '../models/athlete_preview.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/widgets/app_card.dart';
 
 class AthleteWidget extends StatelessWidget {
   final AthletePreview athletePreview;
@@ -13,11 +15,14 @@ class AthleteWidget extends StatelessWidget {
     final theme = Theme.of(ctx);
     final mono = theme.extension<AppTextStyles>()!;
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
-      onTap: () {ctx.push("/athlete/${athletePreview.id}");},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: AppCard(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          ctx.push("/athlete/${athletePreview.id}");
+        },
+        padding: const EdgeInsets.all(12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -25,7 +30,7 @@ class AthleteWidget extends StatelessWidget {
               child: Text(
                 "${athletePreview.name} ${athletePreview.surname}",
                 overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyLarge,
+                style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             Text(athletePreview.birthDate, style: mono.monoDate),

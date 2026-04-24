@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/team_preview.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/widgets/app_card.dart';
 
 class TeamWidget extends StatelessWidget {
   final TeamPreview teamPreview;
@@ -11,11 +13,14 @@ class TeamWidget extends StatelessWidget {
   Widget build(BuildContext ctx) {
     final theme = Theme.of(ctx);
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
-      onTap: () {ctx.push("/team/${teamPreview.id}");},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: AppCard(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          ctx.push("/team/${teamPreview.id}");
+        },
+        padding: const EdgeInsets.all(12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -23,7 +28,7 @@ class TeamWidget extends StatelessWidget {
               child: Text(
                 teamPreview.name,
                 overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyLarge,
+                style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             Text(

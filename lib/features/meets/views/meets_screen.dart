@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mykayak/features/settings/widgets/settings_button.dart';
 import '../widgets/meet_widget.dart';
 import '../providers/meet_providers.dart';
+import '../../../core/widgets/shimmer.dart';
 
 class MeetsScreen extends ConsumerWidget {
   const MeetsScreen({super.key});
@@ -29,7 +30,28 @@ class MeetsScreen extends ConsumerWidget {
             );
           },
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => Shimmer(
+          child: ListView.builder(
+            itemCount: 12,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SkeletonBox(width: 160, height: 18),
+                      const SkeletonBox(width: 70, height: 14),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const SkeletonBox(width: 240, height: 14),
+                ],
+              ),
+            ),
+          ),
+        ),
         error: (err, stack) => Center(child: Text("Errore: $err")),
       ),
     );

@@ -45,6 +45,31 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   }
 }
 
+class AppDecorations extends ThemeExtension<AppDecorations> {
+  final BoxDecoration cardDecoration;
+
+  const AppDecorations({
+    required this.cardDecoration,
+  });
+
+  @override
+  AppDecorations copyWith({
+    BoxDecoration? cardDecoration,
+  }) {
+    return AppDecorations(
+      cardDecoration: cardDecoration ?? this.cardDecoration,
+    );
+  }
+
+  @override
+  AppDecorations lerp(covariant ThemeExtension<AppDecorations>? other, double t) {
+    if (other is! AppDecorations) return this;
+    return AppDecorations(
+      cardDecoration: BoxDecoration.lerp(cardDecoration, other.cardDecoration, t)!,
+    );
+  }
+}
+
 abstract final class AppTheme {
 
   static TextTheme _buildTextTheme(ColorScheme scheme) {
@@ -130,10 +155,33 @@ abstract final class AppTheme {
     );
   }
 
+  static AppDecorations _buildAppDecorations(ColorScheme scheme) {
+    return AppDecorations(
+      cardDecoration: BoxDecoration(
+        color: scheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: scheme.outline.withAlpha(80), width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(20),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+          BoxShadow(
+            color: Colors.black.withAlpha(10),
+            blurRadius: 2,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+    );
+  }
+
   static ThemeData dark() {
     final scheme = AppColors.darkScheme;
     final textTheme = _buildTextTheme(scheme);
     final appTextStyles = _buildAppTextStyles(scheme);
+    final appDecorations = _buildAppDecorations(scheme);
 
     return ThemeData(
       useMaterial3: true,
@@ -141,7 +189,7 @@ abstract final class AppTheme {
       colorScheme: scheme,
       scaffoldBackgroundColor: scheme.surface,
       textTheme: textTheme,
-      extensions: [appTextStyles],
+      extensions: [appTextStyles, appDecorations],
 
       appBarTheme: AppBarTheme(
         backgroundColor: scheme.surface,
