@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mykayak/features/athlete_rankings/providers/ranking_provider.dart';
