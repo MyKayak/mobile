@@ -7,6 +7,7 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final settings = ref.watch(settingsStateProvider);
 
     return Scaffold(
@@ -18,12 +19,11 @@ class SettingsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Indirizzo IP dell'API", style: TextStyle(fontWeight: FontWeight.bold)),
+                Text("Indirizzo IP dell'API", style: theme.textTheme.titleSmall),
                 const SizedBox(height: 8),
                 TextField(
                   controller: TextEditingController(text: settings.serverIp),
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
                     hintText: 'Inserisci l\'indirizzo IP',
                   ),
                   onSubmitted: (value) {

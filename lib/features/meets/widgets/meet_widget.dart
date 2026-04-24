@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app_theme.dart';
 
 class MeetWidget extends StatelessWidget {
   final String id;
@@ -9,26 +10,47 @@ class MeetWidget extends StatelessWidget {
   const MeetWidget({super.key, required this.id, required this.date, required this.name, required this.location});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 5,
-        horizontal: 10
-      ),
-      child: InkWell(
-        onTap: () {
-          context.push('/meets/races/$id');
-        },
+    final theme = Theme.of(context);
+    final mono = theme.extension<AppTextStyles>()!;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(8),
+      onTap: () {
+        context.push('/meets/races/$id');
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: theme.colorScheme.outline.withAlpha(60),
+              width: 0.5,
+            ),
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(location, style:TextStyle(fontSize:18), overflow: TextOverflow.ellipsis,),
-                Text(date, style:TextStyle(fontSize:18))
+                Expanded(
+                  child: Text(
+                    location,
+                    style: theme.textTheme.titleMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(date, style: mono.monoDate),
               ],
             ),
-            Text(name, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color.fromARGB(128, 0, 0, 0), fontSize: 12)),
+            const SizedBox(height: 2),
+            Text(
+              name,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.bodySmall,
+            ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import '../../../core/utils/time_formatter.dart';
 
 @immutable
 class RankingEntry {
@@ -14,6 +15,9 @@ class RankingEntry {
   final String boat;
 
   const RankingEntry(this.athleteId, this.athleteName, this.athleteSurname, this.birthDate, this.distance, this.category, this.division, this.bestTime, this.bestThreeAverage, this.boat);
+
+  String get timeLabel => TimeFormatter.formatTime(bestTime);
+  String get avgLabel => TimeFormatter.formatTime(bestThreeAverage);
 
   factory RankingEntry.fromMap(Map<String, dynamic> map) {
     return RankingEntry(

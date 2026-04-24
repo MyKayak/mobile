@@ -8,28 +8,29 @@ class MedalTableScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final options = ref.watch(medalTableOptionsStateProvider);
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Text(
               "Medagliere Generale",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleLarge,
             ),
           ),
           Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Stagione:"),
+                      Text("Stagione:", style: theme.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       OutlinedButton(
                         onPressed: () => _showSeasonDialog(context, ref, options.season),
@@ -40,7 +41,7 @@ class MedalTableScreen extends ConsumerWidget {
                     ],
                   ),
                   SwitchListTile(
-                    title: const Text("Solo Campionati"),
+                    title: Text("Solo Campionati", style: theme.textTheme.bodyMedium),
                     value: options.onlyChampionships,
                     onChanged: (value) {
                       ref.read(medalTableOptionsStateProvider.notifier).updateOnlyChampionships(value);

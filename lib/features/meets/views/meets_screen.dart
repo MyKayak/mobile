@@ -12,13 +12,10 @@ class MeetsScreen extends ConsumerWidget {
     final meetsAsync = ref.watch(meetsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text("Gare e Risultati"),
-          const SettingsButton()
-        ],
-      )),
+      appBar: AppBar(
+        title: const Text("Gare e Risultati"),
+        actions: const [SettingsButton()],
+      ),
       body: meetsAsync.when(
         data: (meets) => ListView.builder(
           itemCount: meets.length,

@@ -21,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Cerca')),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             Consumer(
@@ -49,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 );
               },
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             Expanded(
               child: mode == SearchMode.teams
                   ? const TeamSearchWidget()

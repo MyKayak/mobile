@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_theme.dart';
 import '../models/heat.dart';
 
 class HeatWidget extends StatelessWidget {
@@ -8,47 +9,91 @@ class HeatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final mono = theme.extension<AppTextStyles>()!;
+
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Batteria ${heat.index}",
-                style: TextStyle(overflow: TextOverflow.ellipsis),
+          Container(
+            padding: const EdgeInsets.only(bottom: 6),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: theme.colorScheme.outline.withAlpha(60),
+                  width: 0.5,
+                ),
               ),
-              Text(heat.startTime.split(" ")[1]),
-            ],
-          ),
-          ...heat.performances.map(
-            (performance) => (Row(
+            ),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text(performance.placement.toString()),
-                    Text("(${performance.lane})"),
-                  ],
-                ),
-                Column(
-                  children: [
-                    ...performance.athletes.map(
-                      (athlete) => Text(
-                        "${athlete.name} ${athlete.surname} ",
-                      ),
-                    ),
-                  ],
-                ),
-                Text(performance.teamName),
                 Text(
-                  performance.status.isEmpty
-                      ? performance.timeLabel
-                      : performance.status,
+                  "Batteria ${heat.index}",
+                  style: theme.textTheme.titleSmall,
+                ),
+                Text(
+                  heat.startTime.split(" ")[1],
+                  style: mono.monoTimeSmall,
                 ),
               ],
-            )),
+            ),
+          ),
+          const SizedBox(height: 4),
+          ...heat.performances.map(
+            (performance) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 32,
+                    child: Column(
+                      children: [
+                        Text(
+                          performance.placement.toString(),
+                          style: mono.monoMedal,
+                        ),
+                        Text(
+                          "(${performance.lane})",
+                          style: theme.textTheme.bodySmall?.copyWith(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...performance.athletes.map(
+                            (athlete) => Text(
+                              "${athlete.name} ${athlete.surname}",
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      performance.teamName,
+                      style: theme.textTheme.bodySmall,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    performance.status.isEmpty
+                        ? performance.timeLabel
+                        : performance.status,
+                    style: mono.monoTime,
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

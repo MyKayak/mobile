@@ -1,4 +1,5 @@
 import '../../teams/models/team_preview.dart';
+import '../../../core/utils/time_formatter.dart';
 
 class AthleteDetail {
   final int id;
@@ -53,6 +54,8 @@ class PersonalRecord {
     required this.time,
   });
 
+  String get timeLabel => TimeFormatter.formatTime(time);
+
   factory PersonalRecord.fromMap(Map<String, dynamic> map) {
     return PersonalRecord(
       boat: map["boat"] ?? "",
@@ -71,6 +74,8 @@ class TimeProgressionEntry {
     required this.timeMs,
     required this.date,
   });
+
+  String get timeLabel => TimeFormatter.formatTime(timeMs);
 
   factory TimeProgressionEntry.fromMap(Map<String, dynamic> map) {
     return TimeProgressionEntry(

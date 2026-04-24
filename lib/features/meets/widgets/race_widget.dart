@@ -13,6 +13,8 @@ class RaceWidget extends StatelessWidget {
   const RaceWidget({super.key, required this.meetId, required this.id, required this.code, required this.distance, required this.division, required this.category, required this.boat, required this.level});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     String label = "";
 
     label += boat;
@@ -57,16 +59,26 @@ class RaceWidget extends StatelessWidget {
         label += "Misto";
     }
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 5,
-        horizontal: 10
-      ),
-      child: InkWell(
-        onTap: () {
-          context.push('/meets/races/$meetId/heats/$id');
-        },
-        child: Text(label, style:TextStyle(fontSize:18), overflow: TextOverflow.ellipsis,)
+    return InkWell(
+      borderRadius: BorderRadius.circular(8),
+      onTap: () {
+        context.push('/meets/races/$meetId/heats/$id');
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: theme.colorScheme.outline.withAlpha(40),
+              width: 0.5,
+            ),
+          ),
+        ),
+        child: Text(
+          label,
+          style: theme.textTheme.bodyLarge,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

@@ -9,15 +9,27 @@ class TeamWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final theme = Theme.of(ctx);
+
     return InkWell(
+      borderRadius: BorderRadius.circular(8),
       onTap: () {ctx.push("/team/${teamPreview.id}");},
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(teamPreview.name, overflow: TextOverflow.ellipsis),
-            Text(teamPreview.id),
+            Expanded(
+              child: Text(
+                teamPreview.name,
+                overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.bodyLarge,
+              ),
+            ),
+            Text(
+              teamPreview.id,
+              style: theme.textTheme.bodySmall,
+            ),
           ],
         ),
       ),

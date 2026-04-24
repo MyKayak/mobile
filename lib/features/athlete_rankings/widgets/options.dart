@@ -48,9 +48,9 @@ class AthleteRankingOptions extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: () => _showSelectionDialog<int>(
                     context: context,
-                    title: "Select Distance",
+                    title: "Scegli la distanza",
                     currentValue: options.distance,
-                    values: [200, 500, 1000, 5000],
+                    values: [200, 500, 1000],
                     labelBuilder: (v) => "${v}m",
                     onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateDistance(v),
                   ),
@@ -60,7 +60,7 @@ class AthleteRankingOptions extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: () => _showSelectionDialog<String?>(
                     context: context,
-                    title: "Select Division",
+                    title: "Scegli la categoria",
                     currentValue: options.division,
                     values: ["Tutti", "SEN", "U23", "JUN", "RAG", "RA1"],
                     labelBuilder: (v) => v ?? "Tutti",
@@ -72,7 +72,7 @@ class AthleteRankingOptions extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: () => _showSelectionDialog<int?>(
                     context: context,
-                    title: "Select Season",
+                    title: "Scegli la stagione",
                     currentValue: options.season,
                     values: [2022, 2023, 2024, 2025, 2026, -1],
                     labelBuilder: (v) => v! > 2000 ? v.toString() : "Tutte",

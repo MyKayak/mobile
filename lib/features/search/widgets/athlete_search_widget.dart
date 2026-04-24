@@ -12,7 +12,7 @@ class AthleteSearchWidget extends ConsumerWidget {
     final asyncAthletes = ref.watch(athletesProvider(query));
 
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         children: [
           TextField(
@@ -22,7 +22,7 @@ class AthleteSearchWidget extends ConsumerWidget {
             },
             decoration: const InputDecoration(
               hintText: 'Daniele Sc...',
-              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.person_search),
             ),
           ),
           const SizedBox(height: 10),

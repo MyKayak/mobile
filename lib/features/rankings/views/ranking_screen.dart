@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mykayak/features/athlete_rankings/views/athlete_rankings_screen.dart';
 import 'package:mykayak/features/medal_table/views/medal_table_screen.dart';
 

@@ -12,12 +12,20 @@ class HeatsScreen extends ConsumerWidget {
     final heatsAsync = ref.watch(heatsProvider(raceId.toString()));
 
     return Scaffold(
-      appBar: AppBar(title: Text("Batterie")),
+      appBar: AppBar(title: const Text("Batterie")),
       body: heatsAsync.when(
-        data: (heats) =>ListView(children:[Column(children: [...heats.map((heat) => HeatWidget(heat: heat))]),]),
-            
-        loading: () => Center(child:CircularProgressIndicator()),
-        error: (err, stack) => Text("Errore:$err\nDove:$stack"),
+        data: (heats) => ListView(
+          children: [
+            ...heats.map((heat) => HeatWidget(heat: heat)),
+          ],
+        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, stack) => Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text("Errore: $err"),
+          ),
+        ),
       ),
     );
   }

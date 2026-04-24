@@ -12,7 +12,7 @@ class TeamSearchWidget extends ConsumerWidget {
     final asyncTeams = ref.watch(teamsProvider(query));
 
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         children: [
           TextField(
@@ -22,7 +22,7 @@ class TeamSearchWidget extends ConsumerWidget {
             },
             decoration: const InputDecoration(
               hintText: 'Canottieri...',
-              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.groups_outlined),
             ),
           ),
           const SizedBox(height: 10),
