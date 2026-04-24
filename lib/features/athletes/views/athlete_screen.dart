@@ -55,52 +55,60 @@ class AthleteScreen extends ConsumerWidget {
                 style: theme.textTheme.titleMedium,
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                children: (() {
-                  final filteredPRs = athleteData.personalRecords
-                      .where((pr) => pr.boat.endsWith("1"))
-                      .toList();
-                  
-                  filteredPRs.sort((a, b) {
-                    int distComp = a.distance.compareTo(b.distance);
-                    if (distComp != 0) return distComp;
-                    return a.boat.compareTo(b.boat);
-                  });
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minWidth: constraints.maxWidth - 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: (() {
+                        final filteredPRs = athleteData.personalRecords
+                            .where((pr) => pr.boat.endsWith("1"))
+                            .toList();
+                        
+                        filteredPRs.sort((a, b) {
+                          int distComp = a.distance.compareTo(b.distance);
+                          if (distComp != 0) return distComp;
+                          return a.boat.compareTo(b.boat);
+                        });
 
-                  final uniqueBoats = filteredPRs
-                      .map((pr) => pr.boat[0].toUpperCase())
-                      .toSet();
-                  final showBoat = uniqueBoats.length > 1;
+                        final uniqueBoats = filteredPRs
+                            .map((pr) => pr.boat[0].toUpperCase())
+                            .toSet();
+                        final showBoat = uniqueBoats.length > 1;
 
-                  return filteredPRs.map(
-                    (pr) => SizedBox(
-                      width: 148,
-                      child: Card(
-                        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "${showBoat ? "${pr.boat[0]} " : ""}${pr.distance}m",
-                                style: theme.textTheme.titleSmall,
+                        return filteredPRs.map(
+                          (pr) => SizedBox(
+                            width: 148,
+                            child: Card(
+                              margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "${showBoat ? "${pr.boat[0]} " : ""}${pr.distance}m",
+                                      style: theme.textTheme.titleSmall,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      pr.timeLabel,
+                                      style: mono.monoTime,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                pr.timeLabel,
-                                style: mono.monoTime,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
+                        ).toList();
+                      })(),
                     ),
-                  ).toList();
-                })(),
-              ),
+                  ),
+                );
+              },
             ),
             if (athleteData.timeProgression.isNotEmpty) ...[
               const Divider(),

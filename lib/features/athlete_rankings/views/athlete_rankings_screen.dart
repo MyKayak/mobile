@@ -10,8 +10,6 @@ import '../../../core/theme/app_theme.dart';
 class AthleteRankingsScreen extends ConsumerWidget {
   const AthleteRankingsScreen({super.key});
 
-  const AthleteRankingsScreen({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncRankings = ref.watch(rankingsProvider);
@@ -20,7 +18,6 @@ class AthleteRankingsScreen extends ConsumerWidget {
 
     return Column(
       children: [
-        const AthleteRankingOptions(),
         const AthleteRankingOptions(),
         Expanded(
           child: asyncRankings.when(
