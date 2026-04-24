@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mykayak/features/athlete_rankings/providers/ranking_provider.dart';
@@ -9,6 +10,8 @@ import '../../../core/theme/app_theme.dart';
 class AthleteRankingsScreen extends ConsumerWidget {
   const AthleteRankingsScreen({super.key});
 
+  const AthleteRankingsScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncRankings = ref.watch(rankingsProvider);
@@ -17,6 +20,7 @@ class AthleteRankingsScreen extends ConsumerWidget {
 
     return Column(
       children: [
+        const AthleteRankingOptions(),
         const AthleteRankingOptions(),
         Expanded(
           child: asyncRankings.when(
