@@ -45,7 +45,7 @@ class TeamTitle {
   factory TeamTitle.fromMap(Map<String, dynamic> map) {
     return TeamTitle(
       timeMs: map["time_ms"] ?? 0,
-      startTime: map["start_time"] ?? "",
+      startTime: map["date"] ?? "",
       distance: map["distance"] ?? 0,
       category: map["category"] ?? "",
       division: map["division"] ?? "",
