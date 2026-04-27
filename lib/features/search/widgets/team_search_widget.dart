@@ -39,7 +39,7 @@ class TeamSearchWidget extends ConsumerWidget {
                 itemCount: 10,
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                   child: SkeletonBox(width: double.infinity, height: 50, borderRadius: 16),
                 ),
               ),

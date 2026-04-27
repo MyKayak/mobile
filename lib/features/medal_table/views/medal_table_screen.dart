@@ -17,13 +17,6 @@ class MedalTableScreen extends ConsumerWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Medagliere Generale",
-              style: theme.textTheme.titleLarge,
-            ),
-          ),
-          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: AppCard(
               padding: const EdgeInsets.all(12.0),

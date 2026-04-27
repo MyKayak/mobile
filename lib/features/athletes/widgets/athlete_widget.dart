@@ -16,7 +16,7 @@ class AthleteWidget extends StatelessWidget {
     final mono = theme.extension<AppTextStyles>()!;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
       child: AppCard(
         onTap: () {
           HapticFeedback.lightImpact();

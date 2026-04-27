@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mykayak/features/athlete_rankings/models/rankings.dart';
 import 'package:mykayak/features/athlete_rankings/providers/ranking_provider.dart';
+import '../../../core/widgets/app_card.dart';
 
 class AthleteRankingOptions extends ConsumerWidget {
   const AthleteRankingOptions({super.key});
@@ -10,9 +12,10 @@ class AthleteRankingOptions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     RankingOptions options = ref.watch(rankingOptionsStateProvider);
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: AppCard(
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             Row(
@@ -25,6 +28,7 @@ class AthleteRankingOptions extends ConsumerWidget {
                   ],
                   selected: {options.category},
                   onSelectionChanged: (value) {
+                    HapticFeedback.lightImpact();
                     ref.read(rankingOptionsStateProvider.notifier).updateCategory(value.first);
                   },
                 ),
@@ -36,51 +40,64 @@ class AthleteRankingOptions extends ConsumerWidget {
                   ],
                   selected: {options.boat},
                   onSelectionChanged: (value) {
+                    HapticFeedback.lightImpact();
                     ref.read(rankingOptionsStateProvider.notifier).updateBoat(value.first);
                   },
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                OutlinedButton(
-                  onPressed: () => _showSelectionDialog<int>(
-                    context: context,
-                    title: "Scegli la distanza",
-                    currentValue: options.distance,
-                    values: [200, 500, 1000],
-                    labelBuilder: (v) => "${v}m",
-                    onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateDistance(v),
+            const SizedBox(height: 12),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      HapticFeedback.selectionClick();
+                      _showSelectionSheet<int>(
+                        context: context,
+                        title: "Scegli la distanza",
+                        currentValue: options.distance,
+                        values: [200, 500, 1000],
+                        labelBuilder: (v) => "${v}m",
+                        onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateDistance(v),
+                      );
+                    },
+                    child: Text("${options.distance}m"),
                   ),
-                  child: Text("${options.distance}m"),
-                ),
-                const SizedBox(width: 10),
-                OutlinedButton(
-                  onPressed: () => _showSelectionDialog<String?>(
-                    context: context,
-                    title: "Scegli la categoria",
-                    currentValue: options.division,
-                    values: ["Tutti", "SEN", "U23", "JUN", "RAG", "RA1"],
-                    labelBuilder: (v) => v ?? "Tutti",
-                    onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateDivision(v),
+                  const SizedBox(width: 8),
+                  OutlinedButton(
+                    onPressed: () {
+                      HapticFeedback.selectionClick();
+                      _showSelectionSheet<String?>(
+                        context: context,
+                        title: "Scegli la categoria",
+                        currentValue: options.division,
+                        values: ["Tutti", "SEN", "U23", "JUN", "RAG", "RA1"],
+                        labelBuilder: (v) => (v == "Tutti" || v == null) ? "Tutte" : v,
+                        onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateDivision(v == "Tutti" ? null : v),
+                      );
+                    },
+                    child: Text(options.division ?? "Divisione"),
                   ),
-                  child: Text(options.division ?? "Division"),
-                ),
-                const SizedBox(width: 10),
-                OutlinedButton(
-                  onPressed: () => _showSelectionDialog<int?>(
-                    context: context,
-                    title: "Scegli la stagione",
-                    currentValue: options.season,
-                    values: [2022, 2023, 2024, 2025, 2026, -1],
-                    labelBuilder: (v) => v! > 2000 ? v.toString() : "Tutte",
-                    onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateSeason(v),
+                  const SizedBox(width: 8),
+                  OutlinedButton(
+                    onPressed: () {
+                      HapticFeedback.selectionClick();
+                      _showSelectionSheet<int?>(
+                        context: context,
+                        title: "Scegli la stagione",
+                        currentValue: options.season,
+                        values: [2022, 2023, 2024, 2025, 2026, -1],
+                        labelBuilder: (v) => (v != null && v > 2000) ? v.toString() : "Tutte",
+                        onSelected: (v) => ref.read(rankingOptionsStateProvider.notifier).updateSeason(v),
+                      );
+                    },
+                    child: Text(options.season! > 2000 ? options.season!.toString() : "Tutte"),
                   ),
-                  child: Text(options.season! > 2000 ? options.season!.toString() : "Tutte"),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -88,7 +105,7 @@ class AthleteRankingOptions extends ConsumerWidget {
     );
   }
 
-  void _showSelectionDialog<T>({
+  void _showSelectionSheet<T>({
     required BuildContext context,
     required String title,
     required T currentValue,
@@ -96,25 +113,51 @@ class AthleteRankingOptions extends ConsumerWidget {
     required String Function(T) labelBuilder,
     required void Function(T) onSelected,
   }) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: values.map((value) {
-              return RadioListTile<T>(
-                title: Text(labelBuilder(value)),
-                value: value,
-                groupValue: currentValue,
-                onChanged: (newValue) {
-                  onSelected(value);
-                  Navigator.pop(context);
-                },
-              );
-            }).toList(),
-          ),
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (context) => DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.5,
+        maxChildSize: 0.9,
+        minChildSize: 0.3,
+        builder: (context, scrollController) => Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                controller: scrollController,
+                children: values.map((value) {
+                  return RadioListTile<T>(
+                    title: Text(labelBuilder(value)),
+                    value: value,
+                    groupValue: currentValue,
+                    onChanged: (newValue) {
+                      HapticFeedback.selectionClick();
+                      onSelected(value);
+                      Navigator.pop(context);
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );

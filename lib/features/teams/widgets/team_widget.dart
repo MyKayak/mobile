@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../core/theme/app_theme.dart';
 import '../models/team_preview.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/widgets/app_card.dart';
@@ -14,7 +15,7 @@ class TeamWidget extends StatelessWidget {
     final theme = Theme.of(ctx);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
       child: AppCard(
         onTap: () {
           HapticFeedback.lightImpact();
@@ -33,7 +34,7 @@ class TeamWidget extends StatelessWidget {
             ),
             Text(
               teamPreview.id,
-              style: theme.textTheme.bodySmall,
+              style: theme.extension<AppTextStyles>()!.monoDate,
             ),
           ],
         ),

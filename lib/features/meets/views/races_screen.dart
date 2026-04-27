@@ -23,6 +23,7 @@ class RacesScreen extends ConsumerWidget {
               const SizedBox(height: 8),
               racesAsync.when(
                 data: (races) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: races
                       .map(
                         (race) => RaceWidget(
