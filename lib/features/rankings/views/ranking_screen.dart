@@ -17,7 +17,7 @@ class _RankingScreenState extends State<RankingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Classifica")),
+      appBar: AppBar(title: const Text("Classifica")),
       body: Column(
         children: [
           Padding(
@@ -43,8 +43,8 @@ class _RankingScreenState extends State<RankingScreen> {
           ),
           Expanded(
             child: mode == RankingType.ranking
-                ? AthleteRankingsScreen()
-                : MedalTableScreen(),
+                ? const AthleteRankingsScreen()
+                : const MedalTableScreen(),
           ),
         ],
       ),

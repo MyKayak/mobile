@@ -5,6 +5,7 @@ import '../providers/athlete_providers.dart';
 import '../../../core/utils/time_formatter.dart';
 import '../../../core/widgets/shimmer.dart';
 import '../../../core/widgets/app_card.dart';
+import '../widgets/time_progression_chart.dart';
 
 class AthleteScreen extends ConsumerWidget {
   final int id;
@@ -122,46 +123,49 @@ class AthleteScreen extends ConsumerWidget {
               ...athleteData.timeProgression.entries.map((entry) {
                 return ExpansionTile(
                   title: Text(CategoryFormatter.formatTimeProgressionKey(entry.key)),
-                  children: entry.value.map((tp) {
-                    return ListTile(
-                      title: Text(tp.date, style: mono.monoDate),
-                      trailing: Text(tp.timeLabel, style: mono.monoTime),
-                    );
-                  }).toList(),
+                  children: [
+                    TimeProgressionChart(entries: entry.value),
+                    ...entry.value.map((tp) {
+                      return ListTile(
+                        title: Text(tp.date, style: mono.monoDate),
+                        trailing: Text(tp.timeLabel, style: mono.monoTime),
+                      );
+                    }),
+                  ],
                 );
               }),
             ],
           ],
         ),
-        loading: () => Shimmer(
+        loading: () => const Shimmer(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SkeletonBox(width: 200, height: 28),
-                const SizedBox(height: 8),
-                const SkeletonBox(width: 120, height: 16),
-                const SizedBox(height: 32),
+                SkeletonBox(width: 200, height: 28),
+                SizedBox(height: 8),
+                SkeletonBox(width: 120, height: 16),
+                SizedBox(height: 32),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: const SkeletonBox(width: 150, height: 20),
+                  child: SkeletonBox(width: 150, height: 20),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Row(
                   children: [
-                    const SkeletonBox(width: 140, height: 70, borderRadius: 16),
-                    const SizedBox(width: 8),
-                    const SkeletonBox(width: 140, height: 70, borderRadius: 16),
+                    SkeletonBox(width: 140, height: 70, borderRadius: 16),
+                    SizedBox(width: 8),
+                    SkeletonBox(width: 140, height: 70, borderRadius: 16),
                   ],
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: const SkeletonBox(width: 180, height: 20),
+                  child: SkeletonBox(width: 180, height: 20),
                 ),
-                const SizedBox(height: 16),
-                const SkeletonBox(width: double.infinity, height: 50, borderRadius: 8),
+                SizedBox(height: 16),
+                SkeletonBox(width: double.infinity, height: 50, borderRadius: 8),
               ],
             ),
           ),

@@ -1,15 +1,42 @@
-import 'package:mykayak/core/api/api_service.dart';
 import 'package:mykayak/features/athlete_rankings/models/rankings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/api/api_service_provider.dart';
+import '../../../main.dart';
 
 part 'ranking_provider.g.dart';
 
 @riverpod
-Future<List<RankingEntry>> rankings(Ref ref) async {
-    ApiService apiService = ref.watch(apiServiceProvider);
-    RankingOptions options = ref.watch(rankingOptionsStateProvider);
-    return await apiService.getRankings(options);
+class Rankings extends _$Rankings {
+  @override
+  FutureOr<List<RankingEntry>> build() async {
+    final options = ref.watch(rankingOptionsStateProvider);
+    
+    final cached = objectbox.getRankings(options);
+    
+    if (cached.isNotEmpty) {
+      _refreshFromNetwork(options);
+      return cached;
+    }
+
+    return await _fetchFromNetwork(options);
+  }
+
+  Future<List<RankingEntry>> _fetchFromNetwork(RankingOptions options) async {
+    final apiService = ref.read(apiServiceProvider);
+    final results = await apiService.getRankings(options);
+    
+    objectbox.saveRankings(options, results);
+    return results;
+  }
+
+  Future<void> _refreshFromNetwork(RankingOptions options) async {
+    try {
+      final fresh = await _fetchFromNetwork(options);
+      state = AsyncData(fresh);
+    } catch (e) {
+      // Keep cached data on error
+    }
+  }
 }
 
 @riverpod

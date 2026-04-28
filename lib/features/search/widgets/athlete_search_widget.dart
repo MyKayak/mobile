@@ -38,8 +38,8 @@ class AthleteSearchWidget extends ConsumerWidget {
               child: ListView.builder(
                 itemCount: 10,
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                itemBuilder: (context, index) => const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                   child: SkeletonBox(width: double.infinity, height: 50, borderRadius: 16),
                 ),
               ),

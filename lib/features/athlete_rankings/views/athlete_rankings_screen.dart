@@ -90,22 +90,22 @@ class AthleteRankingsScreen extends ConsumerWidget {
                       border: Border.all(color: theme.colorScheme.outline.withAlpha(80), width: 0.5),
                     ),
                     padding: const EdgeInsets.all(12),
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const SkeletonBox(width: 20, height: 20, borderRadius: 10),
-                        const SizedBox(width: 24),
+                        SkeletonBox(width: 20, height: 20, borderRadius: 10),
+                        SizedBox(width: 24),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SkeletonBox(width: 140, height: 16),
-                              const SizedBox(height: 6),
-                              const SkeletonBox(width: 100, height: 12),
+                              SkeletonBox(width: 140, height: 16),
+                              SizedBox(height: 6),
+                              SkeletonBox(width: 100, height: 12),
                             ],
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        const SkeletonBox(width: 60, height: 16),
+                        SizedBox(width: 16),
+                        SkeletonBox(width: 60, height: 16),
                       ],
                     ),
                   ),

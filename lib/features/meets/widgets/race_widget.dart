@@ -52,18 +52,18 @@ class RaceWidget extends StatelessWidget {
         }
     }
 
-    Icon genderIcon = Icon(Icons.question_mark);
+    Icon genderIcon = const Icon(Icons.question_mark);
 
     switch (category) {
       case "M":
         label += "Maschile";
-        genderIcon = Icon(Icons.male, color: Colors.lightBlueAccent);
+        genderIcon = const Icon(Icons.male, color: Colors.lightBlueAccent);
       case "F":
         label += "Femminile";
-        genderIcon = Icon(Icons.female, color: Colors.pinkAccent);
+        genderIcon = const Icon(Icons.female, color: Colors.pinkAccent);
       case "X":
         label += "Misto";
-        genderIcon = Icon(Icons.people, color: Colors.amberAccent);
+        genderIcon = const Icon(Icons.people, color: Colors.amberAccent);
     }
 
     return Padding(
@@ -77,7 +77,7 @@ class RaceWidget extends StatelessWidget {
         child: Row(
           children: [
             genderIcon,
-            SizedBox(width: 8,),
+            const SizedBox(width: 8,),
             Text(
               label,
               style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),

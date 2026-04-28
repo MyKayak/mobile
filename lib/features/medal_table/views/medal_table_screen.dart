@@ -57,51 +57,31 @@ class MedalTableScreen extends ConsumerWidget {
   }
 
   void _showSeasonSheet(BuildContext context, WidgetRef ref, int? currentSeason) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      builder: (context) => DraggableScrollableSheet(
-        expand: false,
-        initialChildSize: 0.5,
-        maxChildSize: 0.9,
-        minChildSize: 0.3,
-        builder: (context, scrollController) => Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Seleziona Stagione",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
+      builder: (context) => AlertDialog(
+        title: const Text("Seleziona Stagione"),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
+        content: SingleChildScrollView(
+          child: RadioGroup<int>(
+            groupValue: currentSeason ?? -1,
+            onChanged: (value) {
+              if (value != null) {
+                HapticFeedback.selectionClick();
+                ref.read(medalTableOptionsStateProvider.notifier).updateSeason(value);
+                Navigator.pop(context);
+              }
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [2022, 2023, 2024, 2025, 2026, -1].map((year) {
+                return RadioListTile<int>(
+                  title: Text(year > 2000 ? year.toString() : "Tutte"),
+                  value: year,
+                );
+              }).toList(),
             ),
-            Expanded(
-              child: ListView(
-                controller: scrollController,
-                children: [2022, 2023, 2024, 2025, 2026, -1].map((year) {
-                  return RadioListTile<int>(
-                    title: Text(year > 2000 ? year.toString() : "Tutte"),
-                    value: year,
-                    groupValue: currentSeason ?? -1,
-                    onChanged: (value) {
-                      HapticFeedback.selectionClick();
-                      ref.read(medalTableOptionsStateProvider.notifier).updateSeason(value);
-                      Navigator.pop(context);
-                    },
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -113,51 +113,31 @@ class AthleteRankingOptions extends ConsumerWidget {
     required String Function(T) labelBuilder,
     required void Function(T) onSelected,
   }) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      builder: (context) => DraggableScrollableSheet(
-        expand: false,
-        initialChildSize: 0.5,
-        maxChildSize: 0.9,
-        minChildSize: 0.3,
-        builder: (context, scrollController) => Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
+        content: SingleChildScrollView(
+          child: RadioGroup<T>(
+            groupValue: currentValue,
+            onChanged: (newValue) {
+              if (newValue != null) {
+                HapticFeedback.selectionClick();
+                onSelected(newValue);
+                Navigator.pop(context);
+              }
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: values.map((value) {
+                return RadioListTile<T>(
+                  title: Text(labelBuilder(value)),
+                  value: value,
+                );
+              }).toList(),
             ),
-            Expanded(
-              child: ListView(
-                controller: scrollController,
-                children: values.map((value) {
-                  return RadioListTile<T>(
-                    title: Text(labelBuilder(value)),
-                    value: value,
-                    groupValue: currentValue,
-                    onChanged: (newValue) {
-                      HapticFeedback.selectionClick();
-                      onSelected(value);
-                      Navigator.pop(context);
-                    },
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

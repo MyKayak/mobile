@@ -33,20 +33,20 @@ class MeetsScreen extends ConsumerWidget {
         loading: () => Shimmer(
           child: ListView.builder(
             itemCount: 12,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            itemBuilder: (context, index) => const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SkeletonBox(width: 160, height: 18),
-                      const SkeletonBox(width: 70, height: 14),
+                      SkeletonBox(width: 160, height: 18),
+                      SkeletonBox(width: 70, height: 14),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  const SkeletonBox(width: 240, height: 14),
+                  SizedBox(height: 8),
+                  SkeletonBox(width: 240, height: 14),
                 ],
               ),
             ),

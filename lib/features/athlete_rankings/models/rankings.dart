@@ -1,8 +1,12 @@
 import 'package:flutter/foundation.dart';
+import 'package:objectbox/objectbox.dart';
 import '../../../core/utils/time_formatter.dart';
 
-@immutable
+@Entity()
 class RankingEntry {
+  @Id()
+  int id = 0;
+
   final int athleteId;
   final String athleteName;
   final String athleteSurname;
@@ -13,24 +17,39 @@ class RankingEntry {
   final int bestTime;
   final int bestThreeAverage;
   final String boat;
+  final int season;
 
-  const RankingEntry(this.athleteId, this.athleteName, this.athleteSurname, this.birthDate, this.distance, this.category, this.division, this.bestTime, this.bestThreeAverage, this.boat);
+  RankingEntry({
+    this.id = 0,
+    required this.athleteId,
+    required this.athleteName,
+    required this.athleteSurname,
+    required this.birthDate,
+    required this.distance,
+    required this.category,
+    required this.division,
+    required this.bestTime,
+    required this.bestThreeAverage,
+    required this.boat,
+    required this.season,
+  });
 
   String get timeLabel => TimeFormatter.formatTime(bestTime);
   String get avgLabel => TimeFormatter.formatTime(bestThreeAverage);
 
-  factory RankingEntry.fromMap(Map<String, dynamic> map) {
+  factory RankingEntry.fromMap(Map<String, dynamic> map, int season) {
     return RankingEntry(
-      map["athlete_id"] ?? 0,
-      map["name"] ?? "John",
-      map["surname"] ?? "Doe",
-      map["birth_date"] ?? "1970-01-01",
-      map["distance"] ?? 1000,
-      map["category"] ?? "M",
-      map["division"] ?? "SEN",
-      ((map["best_time"] ?? 99999) as num).floor(),
-      ((map["avg_best_3"] ?? 99999) as num).floor(),
-      map["boat"] ?? "K1"
+      athleteId: map["athlete_id"] ?? 0,
+      athleteName: map["name"] ?? "John",
+      athleteSurname: map["surname"] ?? "Doe",
+      birthDate: map["birth_date"] ?? "1970-01-01",
+      distance: map["distance"] ?? 1000,
+      category: map["category"] ?? "M",
+      division: map["division"] ?? "SEN",
+      bestTime: ((map["best_time"] ?? 99999) as num).floor(),
+      bestThreeAverage: ((map["avg_best_3"] ?? 99999) as num).floor(),
+      boat: map["boat"] ?? "K1",
+      season: season,
     );
   }
 }

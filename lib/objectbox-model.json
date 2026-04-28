@@ -21,9 +21,78 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:3689091219268386093",
+      "lastPropertyId": "12:2625187039950191716",
+      "name": "RankingEntry",
+      "properties": [
+        {
+          "id": "1:6409856982991826852",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4331149018442631769",
+          "name": "athleteId",
+          "type": 6
+        },
+        {
+          "id": "3:8967077373556179831",
+          "name": "athleteName",
+          "type": 9
+        },
+        {
+          "id": "4:6947004870107942638",
+          "name": "athleteSurname",
+          "type": 9
+        },
+        {
+          "id": "5:7059539516366747143",
+          "name": "birthDate",
+          "type": 9
+        },
+        {
+          "id": "6:6727552576756054482",
+          "name": "distance",
+          "type": 6
+        },
+        {
+          "id": "7:901517398985096288",
+          "name": "category",
+          "type": 9
+        },
+        {
+          "id": "8:3539470689970283629",
+          "name": "division",
+          "type": 9
+        },
+        {
+          "id": "9:5731191872090129846",
+          "name": "bestTime",
+          "type": 6
+        },
+        {
+          "id": "10:76953798153578721",
+          "name": "bestThreeAverage",
+          "type": 6
+        },
+        {
+          "id": "11:6397710092249951731",
+          "name": "boat",
+          "type": 9
+        },
+        {
+          "id": "12:2625187039950191716",
+          "name": "season",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:5572785839360123887",
+  "lastEntityId": "2:3689091219268386093",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

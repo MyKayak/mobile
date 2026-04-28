@@ -6,6 +6,6 @@ class SettingsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(icon: Icon(Icons.settings), onPressed: (){context.push("/settings");});
+    return IconButton(icon: const Icon(Icons.settings), onPressed: (){context.push("/settings");});
   }
 }
