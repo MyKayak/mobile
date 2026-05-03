@@ -110,15 +110,7 @@ class _TimeProgressionChartState extends State<TimeProgressionChart> {
               barWidth: 3,
               isStrokeCapRound: true,
               showingIndicators: [],
-              dotData: FlDotData(
-                show: true,
-                getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
-                  radius: 3.5,
-                  color: theme.colorScheme.primary,
-                  strokeWidth: 2,
-                  strokeColor: theme.colorScheme.surface,
-                ),
-              ),
+              dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
                 gradient: LinearGradient(

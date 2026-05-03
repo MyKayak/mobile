@@ -8,7 +8,7 @@
 PRODUCT_NAME = mykayak
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.mykayak
+PRODUCT_BUNDLE_IDENTIFIER = net.fuffo.mykayak
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 net.fuffo. All rights reserved.

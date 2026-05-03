@@ -25,7 +25,7 @@ class ApiService {
   final http.Client _client;
 
   ApiService({required String serverIp, http.Client? client})
-    : baseUrl = 'http://$serverIp',
+    : baseUrl = serverIp.startsWith('http') ? serverIp : 'https://$serverIp',
       _client = client ?? http.Client();
 
   Future<List<T>> _get<T>(

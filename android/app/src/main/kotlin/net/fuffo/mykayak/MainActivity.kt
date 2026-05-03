@@ -1,4 +1,4 @@
-package com.example.mykayak
+package net.fuffo.mykayak
 
 import io.flutter.embedding.android.FlutterActivity
 
