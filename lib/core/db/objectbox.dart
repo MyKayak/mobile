@@ -22,9 +22,9 @@ class ObjectBox {
 
   List<RankingEntry> getRankings(RankingOptions options) {
     Condition<RankingEntry> condition = RankingEntry_.boat.equals(options.boat) &
-        RankingEntry_.category.equals(options.category) &
-        RankingEntry_.distance.equals(options.distance) &
-        RankingEntry_.season.equals(options.season ?? 2026);
+      RankingEntry_.category.equals(options.category) &
+      RankingEntry_.distance.equals(options.distance) &
+      RankingEntry_.season.equals(options.season ?? 2026);
 
     if (options.division != null && options.division != "Tutti") {
       condition = condition & RankingEntry_.division.equals(options.division!);
@@ -38,9 +38,9 @@ class ObjectBox {
 
   void saveRankings(RankingOptions options, List<RankingEntry> newEntries) {
     Condition<RankingEntry> condition = RankingEntry_.boat.equals(options.boat) &
-        RankingEntry_.category.equals(options.category) &
-        RankingEntry_.distance.equals(options.distance) &
-        RankingEntry_.season.equals(options.season ?? 2026);
+      RankingEntry_.category.equals(options.category) &
+      RankingEntry_.distance.equals(options.distance) &
+      RankingEntry_.season.equals(options.season ?? 2026);
 
     if (options.division != null && options.division != "Tutti") {
       condition = condition & RankingEntry_.division.equals(options.division!);

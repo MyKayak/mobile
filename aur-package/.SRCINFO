@@ -1,0 +1,17 @@
+pkgbase = mykayak
+	pkgdesc = A new Flutter project for Kayak rankings and meets
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://github.com/MyKayak/mobile
+	arch = x86_64
+	license = unknown
+	makedepends = flutter
+	makedepends = clang
+	makedepends = cmake
+	makedepends = ninja
+	makedepends = pkgconf
+	depends = gtk3
+	source = git+https://github.com/MyKayak/mobile.git#branch=main
+	sha256sums = SKIP
+
+pkgname = mykayak

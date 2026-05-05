@@ -33,9 +33,7 @@ class Rankings extends _$Rankings {
     try {
       final fresh = await _fetchFromNetwork(options);
       state = AsyncData(fresh);
-    } catch (e) {
-      // Keep cached data on error
-    }
+    } catch (_) { }
   }
 }
 

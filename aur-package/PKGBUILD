@@ -1,0 +1,26 @@
+pkgname=mykayak
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A new Flutter project for Kayak rankings and meets"
+arch=('x86_64')
+url="https://github.com/MyKayak/mobile"
+license=('unknown')
+depends=('gtk3')
+makedepends=('flutter' 'clang' 'cmake' 'ninja' 'pkgconf')
+source=("git+https://github.com/MyKayak/mobile.git#branch=main")
+sha256sums=('SKIP')
+
+build() {
+  cd "mobile"
+  flutter config --enable-linux-desktop
+  flutter build linux --release
+}
+
+package() {
+  cd "mobile"
+  install -d "$pkgdir/opt/$pkgname"
+  install -d "$pkgdir/usr/bin"
+
+  cp -r build/linux/x64/release/bundle/* "$pkgdir/opt/$pkgname/"
+  ln -s "/opt/$pkgname/$pkgname" "$pkgdir/usr/bin/$pkgname"
+}
