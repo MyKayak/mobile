@@ -25,6 +25,10 @@ final goRouter = GoRouter(
       path: '/team/:id',
       builder: (context, state) => TeamScreen(id: state.pathParameters["id"]!),
     ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsScreen(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return ScaffoldWithNavBar(navigationShell: navigationShell);
@@ -67,14 +71,6 @@ final goRouter = GoRouter(
             GoRoute(
               path: '/search',
               builder: (context, state) => const SearchScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/settings',
-              builder: (context, state) => const SettingsScreen(),
             ),
           ],
         ),
